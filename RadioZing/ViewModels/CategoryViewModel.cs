@@ -30,7 +30,7 @@ public partial class CategoryViewModel : ViewModelBase
     public async Task InitializeAsync()
     {
         await LoadCategoryAsync();
-        var shows = await showsService.GetShowsByCategoryAsync(new Guid(Id));
+        var shows = await showsService.GetShowsByCategoryAsync(Id);
 
         Shows = LoadShows(shows);
     }

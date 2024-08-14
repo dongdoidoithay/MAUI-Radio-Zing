@@ -20,17 +20,18 @@ public class ShowsService
 
     public async Task<IEnumerable<Category>> GetAllCategories()
     {
-        var categoryResponse = await TryGetAsync<IEnumerable<CategoryResponse>>("categories");
-        return categoryResponse?.Select(response => new Category(response));
+        var categoryResponse = await TryGetAsync<RootCategoryResponse>($"api/blog/get-all-cate");
+        return categoryResponse?.data?.Select(response => new Category(response));
     }
 
     public async Task<Show> GetShowByIdAsync(string id)
     {
-        var showResponse = await TryGetAsync<DataResponse>($"shows/{id}");
+        var showResponse = await TryGetAsync<DataResponse>($"/api/blog/info/{id}");
 
-        return showResponse == null
-            ? null
-            : GetShow(showResponse);
+        //return showResponse == null
+        //    ? null
+        //    : GetShow(showResponse);
+        return null;
     }
 
     public Task<IEnumerable<Show>> GetShowsAsync()
@@ -38,7 +39,7 @@ public class ShowsService
         return SearchShowsAsync(string.Empty);
     }
 
-    public async Task<IEnumerable<Show>> GetShowsByCategoryAsync(Guid idCategory)
+    public async Task<IEnumerable<Show>> GetShowsByCategoryAsync(string idCategory)
     {
         var result = new List<Show>();
         var showsResponse = await TryGetAsync<IEnumerable<ShowResponse>>($"/api/blog/Cate");
@@ -58,21 +59,20 @@ public class ShowsService
 
     public async Task<IEnumerable<Show>> SearchShowsAsync(string idCategory, string term)
     {
-        var showsResponse = await TryGetAsync<IEnumerable<DataResponse>>($"shows?limit=20&categoryId={idCategory}&term={term}");
+        var showsResponse = await TryGetAsync<RootEpisodeResponse>($"shows?limit=20&categoryId={idCategory}&term={term}");
 
-        return showsResponse?.Select(response => GetShow(response));
+        return showsResponse?.data?.Select(response => GetShow(response));
     }
 
     public async Task<IEnumerable<Show>> SearchShowsAsync(string term)
     {
         if (string.IsNullOrEmpty(term))
-            term = "radio-online";
-        var showsResponse = await TryGetAsync<RootDataResponse>($"api/blog/GetByGroup/{term}/12/0");
-        Console.Write(showsResponse);
+            term = "blog-radio";
+        var showsResponse = await TryGetAsync<RootEpisodeResponse>($"api/blog/get-episode-by-cate/{term}/30/0");
         return showsResponse?.data?.Select(response => GetShow(response));
     }
 
-    private Show GetShow(DataResponse response)
+    private Show GetShow(EpisodeResponse response)
     {
         return new Show(response, listenLaterService);
     }

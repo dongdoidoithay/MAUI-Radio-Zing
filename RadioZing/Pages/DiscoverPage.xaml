@@ -50,7 +50,7 @@
                 </DataTemplate>
             </CollectionView.GroupHeaderTemplate>           
         </CollectionView>
-
+      
         <controls:Player x:Name="player"
                          VerticalOptions="End">
         </controls:Player>

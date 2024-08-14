@@ -1,6 +1,11 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RadioZing.Controls.Player">
+             x:Class="RadioZing.Controls.Player"
+               BackgroundColor="{StaticResource Grey9}"
+  IsVisible="false"
+              xmlns:local="clr-namespace:RadioZing.Controls"
+ xmlns:res="clr-namespace:RadioZing.Resources.Strings"
+>
     <ContentView.Content>
         <OnPlatform x:TypeArguments="View">
             <On Platform="Android,iOS">

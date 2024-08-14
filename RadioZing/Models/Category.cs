@@ -6,11 +6,20 @@ public class Category
 {
     public Category(CategoryResponse response)
     {
-        Id = response.id;
-        Name = response.name;
-    }   
+        cateId= response.cateId;
+        cateParentId = response.cateParentId;
+        name = response.name;
+        description = response.description;
+        type = response.description;
+        image = response.image;
+        isActive = response.isActive;
+    }
 
-    public string Id { get; set; }
-
-    public string Name { get; set; }
+    public string cateId { get; set; }
+    public string? cateParentId { get; set; }
+    public string? name { get; set; }
+    public string? description { get; set; }
+    public string? type { get; set; }
+    public string? image { get; set; }
+    public bool isActive { get; set; }
 }

@@ -22,6 +22,6 @@ public partial class CategoriesViewModel : ViewModelBase
     [RelayCommand]
     Task Selected(Category category)
     {
-        return Shell.Current.GoToAsync($"{nameof(CategoryPage)}?Id={category.Id}");
+        return Shell.Current.GoToAsync($"{nameof(CategoryPage)}?Id={category.cateId}");
     }
 }

@@ -56,9 +56,9 @@ public static class Settings
         set => Preferences.Set(nameof(EpisodeUrl), value);
     }
 
-    public static DateTime EpisodePublished
+    public static DateTime? EpisodePublished
     {
         get => Preferences.Get(nameof(EpisodePublished), new DateTime());
-        set => Preferences.Set(nameof(EpisodePublished), value);
+        set => Preferences.Set(nameof(EpisodePublished), value??new DateTime());
     }
 }

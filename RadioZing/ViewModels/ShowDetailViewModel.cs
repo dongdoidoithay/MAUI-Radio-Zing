@@ -12,8 +12,6 @@ public partial class ShowDetailViewModel : ViewModelBase
     private readonly ShowsService showsService;
     private readonly ImageProcessingService imageProcessingService;
 
-    private string showId;
-
     public string Id { get; set; }
 
     [ObservableProperty]
@@ -44,17 +42,12 @@ public partial class ShowDetailViewModel : ViewModelBase
 
     internal async Task InitializeAsync()
     {
-        if (Id != null)
-        {
-            showId = new Guid(Id).ToString();
-        }
-        
         await FetchAsync();
     }
 
     async Task FetchAsync()
     {
-        var show = await showsService.GetShowByIdAsync(showId);
+        var show = await showsService.GetShowByIdAsync(Id);
 
         if (show == null)
         {
@@ -83,7 +76,7 @@ public partial class ShowDetailViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    Task TapEpisode(Episode episode) => Shell.Current.GoToAsync($"{nameof(EpisodeDetailPage)}?Id={episode.Id}&ShowId={showId}");
+    Task TapEpisode(Episode episode) => Shell.Current.GoToAsync($"{nameof(EpisodeDetailPage)}?Id={episode.Id}&ShowId={Id}");
 
     [RelayCommand]
     async Task Subscribe()
