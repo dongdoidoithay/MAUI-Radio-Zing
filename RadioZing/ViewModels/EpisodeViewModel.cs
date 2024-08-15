@@ -37,5 +37,5 @@ public partial class EpisodeViewModel : ViewModelBase
     Task PlayEpisode() => playerService.PlayAsync(Episode, Show);
 
     [RelayCommand]
-    Task NavigateToDetail() => Shell.Current.GoToAsync($"{nameof(EpisodeDetailPage)}?Id={episode.Id}&ShowId={Show.Id}");
+    Task NavigateToDetail() => Shell.Current.GoToAsync($"{nameof(EpisodeDetailPage)}?Id={episode.episodeId}&ShowId={Show.Id}");
 }

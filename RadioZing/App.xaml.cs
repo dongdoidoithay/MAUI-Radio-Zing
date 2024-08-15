@@ -13,6 +13,7 @@
             else
                 MainPage = new MobileShell();
 
+            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(DiscoverPage), typeof(DiscoverPage));
             Routing.RegisterRoute(nameof(ShowDetailPage), typeof(ShowDetailPage));
             Routing.RegisterRoute(nameof(EpisodeDetailPage), typeof(EpisodeDetailPage));

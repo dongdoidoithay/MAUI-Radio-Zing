@@ -109,6 +109,9 @@
       <MauiXaml Update="Pages\EpisodeDetailPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Pages\HomePage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Pages\ListenLaterPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>

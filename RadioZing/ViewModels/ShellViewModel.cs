@@ -4,6 +4,7 @@ namespace RadioZing.ViewModels;
 
 public class ShellViewModel : ViewModelBase
 {
+    public AppSection Home { get; set; }
     public AppSection Discover { get; set; }
     public AppSection Subscriptions { get; set; }
     public AppSection Lists { get; set; }
@@ -13,6 +14,7 @@ public class ShellViewModel : ViewModelBase
 
     public ShellViewModel()
     {
+        Home = new AppSection() { Title = AppResource.Discover, Icon = "discover.png", IconDark = "discover_dark.png", TargetType = typeof(HomePage) };
         Discover = new AppSection() { Title = AppResource.Discover , Icon = "discover.png", IconDark="discover_dark.png", TargetType = typeof(DiscoverPage) };
         Subscriptions = new AppSection() { Title = AppResource.Subscriptions, Icon = "subscriptions.png", IconDark="subscriptions_dark.png", TargetType = typeof(SubscriptionsPage) };
         ListenLater = new AppSection() { Title = Config.Desktop ? AppResource.Listen_Later : AppResource.Listen_Later_Short, Icon = "clock.png", IconDark="clock_dark.png", TargetType = typeof(ListenLaterPage) };

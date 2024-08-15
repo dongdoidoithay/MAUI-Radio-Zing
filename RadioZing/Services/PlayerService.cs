@@ -32,7 +32,7 @@ public class PlayerService
     {
         if (episode == null) { return; }
 
-        var isOtherEpisode = CurrentEpisode?.Id != episode.Id;
+        var isOtherEpisode = CurrentEpisode?.episodeId != episode.episodeId;
 
         CurrentShow = show;
 
@@ -62,7 +62,7 @@ public class PlayerService
 
     public Task PlayAsync(Episode episode, Show show)
     {
-        var isOtherEpisode = CurrentEpisode?.Id != episode.Id;
+        var isOtherEpisode = CurrentEpisode?.episodeId != episode.episodeId;
         var isPlaying = isOtherEpisode || !audioService.IsPlaying;
         var position = isOtherEpisode ? 0 : CurrentPosition;
 
@@ -70,11 +70,11 @@ public class PlayerService
         {
             if (isPlaying)
             {
-                SemanticScreenReader.Announce(string.Format("Episode with title {0} will start playing", CurrentEpisode.Title));
+                SemanticScreenReader.Announce(string.Format("Episode with title {0} will start playing", CurrentEpisode.subtitle));
             }
             else
             {
-                SemanticScreenReader.Announce(string.Format("Episode with title {0} will be paused", CurrentEpisode.Title));
+                SemanticScreenReader.Announce(string.Format("Episode with title {0} will be paused", CurrentEpisode.subtitle));
             }
         }
 

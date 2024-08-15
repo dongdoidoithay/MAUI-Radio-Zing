@@ -9,7 +9,7 @@
     <TabBar>
         <Tab Title="{Binding Discover.Title}"
              Icon="{Binding Discover.Icon}">
-            <ShellContent ContentTemplate="{DataTemplate pages:DiscoverPage}" />
+            <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
         </Tab>
         <Tab Title="{Binding Subscriptions.Title}"
              Icon="{Binding Subscriptions.Icon}">

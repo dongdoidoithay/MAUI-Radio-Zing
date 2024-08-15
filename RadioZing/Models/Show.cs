@@ -26,9 +26,9 @@ public class Show
             Episodes = new List<Episode>();
             Episode ed= new Episode()
             {
-                Id= response.episodeId,
-                Title= response.subtitle,
-                Description= response.desc,
+                episodeId= response.episodeId,
+                subtitle= response.subtitle,
+                desc= response.desc,
                 Duration="0:0",
                 Url=new Uri(response.songUrl),
             };

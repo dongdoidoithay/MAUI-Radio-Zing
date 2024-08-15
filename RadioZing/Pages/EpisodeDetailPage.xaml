@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:RadioZing.ViewModels"
              x:DataType="viewmodels:EpisodeDetailViewModel"
              Style="{StaticResource DetailPageStyle}"
-             Title="{Binding Episode.Title}"
+             Title="{Binding Episode.subtitle}"
              xmlns:converters="clr-namespace:RadioZing.Converters"
              xmlns:res="clr-namespace:RadioZing.Resources.Strings"
              xmlns:controls="clr-namespace:RadioZing.Controls">
@@ -24,12 +24,12 @@
                        SemanticProperties.Description="It is the banner of the episode"
                        WidthRequest="156" />
                 <Label Style="{StaticResource H6LabelStyle}"
-                       Text="{Binding Episode.Title}" />
+                       Text="{Binding Episode.subtitle}" />
                 <Label Style="{StaticResource SH6LabelStyle}"
                        Text="{Binding Show.Title}" />
                 <Label Margin="0,0,0,16"
                        Style="{StaticResource BodySLabelStyle}"
-                       Text="{Binding Episode.Published, StringFormat='{0:MMM dd, yyyy}'}" />
+                       Text="{Binding Episode.date, StringFormat='{0:MMM dd, yyyy}'}" />
                 <Grid Margin="0,0,0,16"
                       ColumnDefinitions="auto,auto,auto,auto"
                       ColumnSpacing="12">
@@ -69,8 +69,8 @@
                     </ImageButton>
                 </Grid>
                 <Label Style="{StaticResource BodySLabelStyle}"
-                       Text="{Binding Episode.Description}"
-                       TextType="{Binding Episode.Description,Converter={StaticResource TextToTypeTextConverter}}"/>
+                       Text="{Binding Episode.desc}"
+                       TextType="{Binding Episode.desc,Converter={StaticResource TextToTypeTextConverter}}"/>
             </VerticalStackLayout>
         </ScrollView>
 

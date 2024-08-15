@@ -52,13 +52,13 @@
                         <Label Grid.Column="1"
                                Grid.Row="1"
                                Style="{StaticResource BodySLabelStyle}"
-                               Text="{Binding Published, StringFormat='{0:MMM dd, yyyy}'}" />
+                               Text="{Binding date, StringFormat='{0:MMM dd, yyyy}'}" />
                         <Label Grid.Column="1"
                                Grid.Row="0"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="Center"
                                Style="{StaticResource LinkLLabelStyle}"
-                               Text="{Binding Title}" />
+                               Text="{Binding subtitle}" />
                         <ImageButton Aspect="AspectFill"
                                      Grid.Column="1"
                                      Grid.RowSpan="2"

@@ -4,6 +4,9 @@ public static class ViewModelExtensions
 {
     public static MauiAppBuilder ConfigureViewModels(this MauiAppBuilder builder)
     {
+
+        builder.Services.AddSingleton<HomePageViewModel>();
+
         builder.Services.AddSingleton<CategoriesViewModel>();
         builder.Services.AddTransient<CategoryViewModel>();
         builder.Services.AddSingleton<DiscoverViewModel>();

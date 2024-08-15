@@ -16,7 +16,7 @@ public class ListenLaterService
 
     public void Add(Episode episode, Show Show)
     {
-        if (episodes.Any(ep => ep.Item1.Id == episode.Id))
+        if (episodes.Any(ep => ep.Item1.episodeId == episode.episodeId))
             
             return;
         
@@ -25,7 +25,7 @@ public class ListenLaterService
 
     public void Remove(Episode episode)
     {
-        var episodeToRemove = episodes.First(ep => ep.Item1.Id == episode.Id);
+        var episodeToRemove = episodes.First(ep => ep.Item1.episodeId == episode.episodeId);
         if (episodeToRemove != null)
         {
             episodes.Remove(episodeToRemove);
@@ -34,11 +34,11 @@ public class ListenLaterService
 
     public bool IsInListenLater(Episode episode)
     {
-        return episodes.Any(ep => ep.Item1.Id == episode.Id);
+        return episodes.Any(ep => ep.Item1.episodeId == episode.episodeId);
     }
     
     public bool IsInListenLater(string id)
     {
-        return episodes.Any(ep => ep.Item1.Id == id);
+        return episodes.Any(ep => ep.Item1.episodeId == id);
     }
 }

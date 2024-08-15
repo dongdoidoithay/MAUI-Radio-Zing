@@ -52,8 +52,8 @@ public partial class Player : ContentView
         BindingContext = new
         {
             PlayButtonSource = this.playerService.IsPlaying ? "player_pause.png" : "player_play.png",
-            EpisodeTitle = this.playerService.CurrentEpisode.Title,
-            AuthorText = $"{this.playerService.CurrentShow?.Author} - {this.playerService.CurrentEpisode?.Published:MMM, d yyy}",
+            EpisodeTitle = this.playerService.CurrentEpisode.subtitle,
+            AuthorText = $"{this.playerService.CurrentShow?.Author} - {this.playerService.CurrentEpisode?.date:MMM, d yyy}",
             PodcastImage = this.playerService.CurrentShow?.Image,
             Duration = this.playerService.CurrentEpisode?.Duration.ToString()
         };

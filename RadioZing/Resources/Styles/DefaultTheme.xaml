@@ -286,4 +286,29 @@
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="IsClippedToBounds" Value="True"/>
     </Style>
+
+
+    <Style
+    x:Key="Tab"
+    TargetType="Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Grey8}, Dark={StaticResource Grey2}}" />
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontAttributes" Value="None"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="Transparent" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Grey8},Light={StaticResource Grey2}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
 </ResourceDictionary>

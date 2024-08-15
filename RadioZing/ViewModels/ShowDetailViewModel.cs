@@ -70,13 +70,13 @@ public partial class ShowDetailViewModel : ViewModelBase
     void SearchEpisode()
     {
         var episodesList = show.Episodes
-            .Where(ep => ep.Title.Contains(TextToSearch, StringComparison.InvariantCultureIgnoreCase))
+            .Where(ep => ep.subtitle.Contains(TextToSearch, StringComparison.InvariantCultureIgnoreCase))
             .ToList();
         Episodes.ReplaceRange(episodesList);
     }
 
     [RelayCommand]
-    Task TapEpisode(Episode episode) => Shell.Current.GoToAsync($"{nameof(EpisodeDetailPage)}?Id={episode.Id}&ShowId={Id}");
+    Task TapEpisode(Episode episode) => Shell.Current.GoToAsync($"{nameof(EpisodeDetailPage)}?Id={episode.episodeId}&ShowId={Id}");
 
     [RelayCommand]
     async Task Subscribe()

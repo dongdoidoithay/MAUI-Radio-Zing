@@ -36,7 +36,7 @@ public partial class ListenLaterViewModel : ViewModelBase
     void Remove(EpisodeViewModel episode)
     {
         var episodeToRemove = Episodes
-            .FirstOrDefault(ep => ep.Episode.Id == episode.Episode.Id);
+            .FirstOrDefault(ep => ep.Episode.episodeId == episode.Episode.episodeId);
         if(episodeToRemove != null)
         {
             listenLaterService.Remove(episode.Episode);

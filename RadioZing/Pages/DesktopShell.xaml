@@ -19,10 +19,10 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="{Binding Discover.Title}"
+    <FlyoutItem Title="{Binding Home.Title}"
                 Icon="{AppThemeBinding Light=discover.png, Dark=discover_dark.png}">
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate pages:DiscoverPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate pages:HomePage}"/>
         </Tab>
     </FlyoutItem>
 

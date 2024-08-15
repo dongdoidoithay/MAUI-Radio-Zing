@@ -24,7 +24,7 @@
             MaxLines="1"
             Style="{OnIdiom Default={StaticResource BodyXLLabelStyle},
                             Phone={StaticResource BodyMLabelStyle}}"
-            Text="{Binding Episode.Title}"
+            Text="{Binding Episode.subtitle}"
             FontAttributes="Bold"/>
         <Label
             LineBreakMode="TailTruncation"
@@ -38,7 +38,7 @@
             MaxLines="1"
             Style="{OnIdiom Default={StaticResource BodyMLabelStyle},
                             Phone={StaticResource BodySLabelStyle}}"
-            Text="{Binding Episode.Published, StringFormat='{0:MMM dd, yyyy}'}" />
+            Text="{Binding Episode.date, StringFormat='{0:MMM dd, yyyy}'}" />
     </VerticalStackLayout>
 
     <Image

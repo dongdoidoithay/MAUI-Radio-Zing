@@ -18,11 +18,31 @@ public class ShowsService
         this.listenLaterService = listenLaterService;
     }
 
+    public async Task<List<Category>> GetRootCate()
+    {
+        var rootCateResponse = await TryGetAsync<RootCategoryResponse>($"api/blog/get-root-cate");
+        return rootCateResponse?.data?.Select(response => new Category(response)).ToList();
+    }
+    public async Task<List<Category>> GetCateByParent(string parentCateId)
+    {
+        var rootCateResponse = await TryGetAsync<RootCategoryResponse>($"api/blog/get-cate-by-parent/{parentCateId}");
+        return rootCateResponse?.data?.Select(response => new Category(response)).ToList();
+    }
     public async Task<IEnumerable<Category>> GetAllCategories()
     {
         var categoryResponse = await TryGetAsync<RootCategoryResponse>($"api/blog/get-all-cate");
         return categoryResponse?.data?.Select(response => new Category(response));
     }
+
+    public async Task<CateEpisodes?> GetEpisodeByCate(string cateId,int page=0,int count=22)
+    {
+        var categoryResponse = await TryGetAsync<RootCateEpisodeResponse>($"api/blog/get-episode-by-cate/{cateId}/{count}/{page}");
+        return categoryResponse?.data;
+    }
+
+
+
+
 
     public async Task<Show> GetShowByIdAsync(string id)
     {

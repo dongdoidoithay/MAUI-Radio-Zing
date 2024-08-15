@@ -62,7 +62,7 @@ public partial class EpisodeDetailViewModel : ViewModelBase
         Show.InitializeCommand.Execute(null);
 
         var eId = new Guid(Id).ToString();
-        Episode = Show.Episodes.FirstOrDefault(e => e.Id == eId);
+        Episode = Show.Episodes.FirstOrDefault(e => e.episodeId == eId);
 
         if (Show == null || Episode == null)
         {
@@ -86,7 +86,7 @@ public partial class EpisodeDetailViewModel : ViewModelBase
             listenLaterService.Add(episode, show.Show);
 
         IsInListenLater = listenLaterService.IsInListenLater(episode);
-        Show.Episodes.FirstOrDefault(x => x.Id == episode.Id).IsInListenLater = IsInListenLater;
+        Show.Episodes.FirstOrDefault(x => x.episodeId == episode.episodeId).IsInListenLater = IsInListenLater;
         return Task.CompletedTask;
     }
 

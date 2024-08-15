@@ -5,6 +5,7 @@ public static class PagesExtensions
     public static MauiAppBuilder ConfigurePages(this MauiAppBuilder builder)
     {
         // main tabs of the app
+        builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<DiscoverPage>();
         builder.Services.AddSingleton<SubscriptionsPage>();
         builder.Services.AddSingleton<ListenLaterPage>();

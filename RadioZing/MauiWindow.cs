@@ -22,12 +22,12 @@
             {
                 var episode = new Episode()
                 {
-                    Id =Settings.EpisodeId,
-                    Title = Settings.EpisodeTitle,
-                    Description = Settings.EpisodeDescription,
+                    episodeId =Settings.EpisodeId,
+                    subtitle = Settings.EpisodeTitle,
+                    desc = Settings.EpisodeDescription,
                     Duration = Settings.EpisodeDuration,
                     Url = new Uri(Settings.EpisodeUrl),
-                    Published = Settings.EpisodePublished
+                    date = Settings.EpisodePublished
                 };
 
                 this.playerService.CurrentEpisode = episode;
@@ -44,12 +44,12 @@
             if (this.playerService.IsPlaying)
             {
                 Settings.CurrentPositionPlayer = this.playerService.CurrentPosition;
-                Settings.EpisodeId = this.playerService.CurrentEpisode.Id.ToString();
-                Settings.EpisodeTitle = this.playerService.CurrentEpisode.Title;
-                Settings.EpisodeDescription = this.playerService.CurrentEpisode.Description;
+                Settings.EpisodeId = this.playerService.CurrentEpisode.episodeId.ToString();
+                Settings.EpisodeTitle = this.playerService.CurrentEpisode.subtitle;
+                Settings.EpisodeDescription = this.playerService.CurrentEpisode.desc;
                 Settings.EpisodeDuration = this.playerService.CurrentEpisode.Duration;
                 Settings.EpisodeUrl = this.playerService.CurrentEpisode.Url.OriginalString;
-                Settings.EpisodePublished = this.playerService.CurrentEpisode.Published;
+                Settings.EpisodePublished = this.playerService.CurrentEpisode.date;
             }
             else
             {
