@@ -39,7 +39,7 @@ public partial class HomePage : ContentPage
         {
             return;
         }
-        _lastScrollToTime = DateTime.Now.AddSeconds(1);
+        _lastScrollToTime = DateTime.Now.AddMilliseconds(20);
 
         if (sender is CollectionView cv && cv is IElementController element)
         {

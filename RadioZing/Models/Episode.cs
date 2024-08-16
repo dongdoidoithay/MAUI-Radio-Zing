@@ -1,5 +1,4 @@
-﻿using Radio.Components;
-using RadioZing.Models.Responses;
+﻿
 using static Radio.Components.ListenTogether.ListenTogether;
 
 namespace RadioZing.Models;
@@ -47,6 +46,7 @@ public partial class Episode : ObservableObject
 
     [ObservableProperty]
     private bool isInListenLater;
-    public Uri ImageUrl =>new Uri(image);
+    public string ImageUrl => image.Replace("//", "/").Replace(":/", "://");
+    //new Uri(image);
 
 }

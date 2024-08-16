@@ -1,10 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using RadioZing.Models.Responses;
 using RadioZing.Resources.Strings;
-using System.Collections.ObjectModel;
-using System.Web;
 
 namespace RadioZing.ViewModels;
 
@@ -48,6 +44,7 @@ public partial class HomePageViewModel : ViewModelBase
     {
         //Delay on first load until window loads
         await FetchRootCateAsync();
+       // await FetchListEpisodeByCate("radio-online");
     }
     private async Task FetchRootCateAsync()
     {
@@ -65,6 +62,7 @@ public partial class HomePageViewModel : ViewModelBase
         HomeCates = new ObservableCollection<Category>(rootCate); //khong dung foreach
         if (_currentRootCateId == "")
         {
+            //radio-online
             _currentRootCateId = rootCate.LastOrDefault().cateId;
             //lay phan tu dau tien
             await FetchCateByParentIdAsync(_currentRootCateId);
@@ -87,19 +85,20 @@ public partial class HomePageViewModel : ViewModelBase
         {
             //Loading("loading....");
             CateEpisodes data = await showsService.GetEpisodeByCate(cateId, _currentPage);
-            if (data != null && data.episodes.Count() > 0)
-            {
-                //add to list
-                foreach (var episode in data.episodes)
-                {
-                    HomeEpisodes.Add(episode);
-                }
-            }
-            //if (data.episodes?.Count() > 0)
+            //if (data != null && data.episodes.Count() > 0)
             //{
-            //    HomeEpisodes.Clear();
-            //    HomeEpisodes = new ObservableCollection<Episode>(data.episodes);
+            //    //add to list
+            //    foreach (var episode in data.episodes)
+            //    {
+            //        //episode.image = await imageProcessingService.ProcessRemoteImage(new Uri(episode.ImageUrl));
+            //        HomeEpisodes.Add(episode);
+            //    }
             //}
+            if (data.episodes?.Count() > 0)
+            {
+                HomeEpisodes.Clear();
+                HomeEpisodes = new ObservableCollection<Episode>(data.episodes);
+            }
         }
         catch (Exception ex)
         {
@@ -151,6 +150,7 @@ public partial class HomePageViewModel : ViewModelBase
                 //add to list
                 foreach(var episode in data.episodes)
                 {
+                    //episode.image = await imageProcessingService.ProcessRemoteImage(new Uri(episode.ImageUrl));
                     HomeEpisodes.Add(episode);
                 }
             }

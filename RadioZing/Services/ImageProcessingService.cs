@@ -7,7 +7,9 @@ namespace RadioZing.Services;
 
 public class ImageProcessingService
 {
-    private readonly HttpClient httpClient = new HttpClient();
+
+
+    private  HttpClient httpClient = new HttpClient();
 
     private readonly RateLimiter rateLimiter = new ConcurrencyLimiter(new ConcurrencyLimiterOptions { PermitLimit = 3, QueueProcessingOrder = QueueProcessingOrder.NewestFirst });
 
@@ -50,6 +52,12 @@ public class ImageProcessingService
 
         try
         {
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+            httpClient = new HttpClient(handler);
+
             using var imageStream = await httpClient.GetStreamAsync(imageUri).ConfigureAwait(false);
             using var data = SKData.Create(imageStream);
             using var codec = SKCodec.Create(data);
@@ -79,6 +87,11 @@ public class ImageProcessingService
             using var encodedImageStream = encodedImage.AsStream();
             using var file = File.Create(cachedImagePath);
             await encodedImageStream.CopyToAsync(file).ConfigureAwait(false);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            cachedImagePath = null;
         }
         finally
         {
