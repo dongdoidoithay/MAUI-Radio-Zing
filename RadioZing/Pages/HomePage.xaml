@@ -2,249 +2,138 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:RadioZing.ViewModels"
+             xmlns:views="clr-namespace:RadioZing.Views"
              x:Class="RadioZing.Pages.HomePage"
              xmlns:controls="clr-namespace:RadioZing.Controls"
-             >
-    <Grid
-        RowDefinitions="Auto,Auto,*,Auto"
-        RowSpacing="10"
-        Background="{AppThemeBinding Light={StaticResource Grey1}, Dark={StaticResource Grey9}}"
-        >
-<!--BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},Light={StaticResource LightBackground}}"-->
-        <!--
-        Move -end single -column layout:
-            row1 search bar
-            row2 platform
-        
-        Desktop single -line layout:
-           col1 platform col2 search bar
-        -->
-        <Grid
-            Grid.Row="0"
-            Padding="10,8,10,8"
-            RowDefinitions="{OnPlatform WinUI='45',MacCatalyst='45',Android='30,45',iOS='30,45'}"
-            ColumnDefinitions="{OnPlatform WinUI='*,200',MacCatalyst='*,200',Android='*',iOS='*'}">
-
-            <HorizontalStackLayout
-                Grid.Row="{OnPlatform WinUI=0,MacCatalyst=0,Android=1,iOS=1}"
-                Grid.Column="{OnPlatform WinUI=0,MacCatalyst=0,Android=0,iOS=0}"
-                BindableLayout.ItemsSource="{Binding HomeCates}"
-                Spacing="20">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout
-                            Spacing="3"
-                            VerticalOptions="End">
-                            <VerticalStackLayout.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=TabChangedAsyncCommand}"
-                                    CommandParameter="{Binding cateId}"/>
-                            </VerticalStackLayout.GestureRecognizers>
-                            <Label
-                                Text="{Binding name}"
-                                VerticalTextAlignment="End"
-                                Style="{StaticResource Tab}">
-                                <Label.Triggers>
-                                    <DataTrigger
-                                        TargetType="Label"
-                                        Binding="{Binding isSelected}"
-                                        Value="true">
-                                        <Setter
-                                            Property="FontSize"
-                                            Value="18"/>
-                                        <Setter
-                                            Property="FontAttributes"
-                                            Value="Bold"/>
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                            <BoxView
-                                HeightRequest="3"
-                                Margin="8,0,8,0"
-                                Color="Transparent">
-                                <BoxView.Triggers>
-                                    <DataTrigger
-                                        TargetType="BoxView"
-                                        Binding="{Binding isSelected}"
-                                        Value="true">
-                                        <Setter
-                                            Property="Color"
-                                            Value="{StaticResource Primary}"/>
-                                    </DataTrigger>
-                                </BoxView.Triggers>
-                            </BoxView>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </HorizontalStackLayout>
-            
- <!--BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSearchBarBackgroundColor},Light={StaticResource LightSearchBarBackgroundColor}}"-->
-            <Border
-                Grid.Row="{OnPlatform WinUI=0,MacCatalyst=0,Android=0,iOS=0}"
-                Grid.Column="{OnPlatform WinUI=1,MacCatalyst=1,Android=0,iOS=0}"
-                HeightRequest="35"
-                VerticalOptions="Start"
-                Padding="5,0,5,0"
-                Background="{AppThemeBinding Light={StaticResource Grey1}, Dark={StaticResource Grey9}}"
-                StrokeThickness="1">
+             xmlns:ff="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:res="clr-namespace:RadioZing.Resources.Strings"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
+    <Grid RowDefinitions="Auto,Auto,*,Auto"
+          RowSpacing="10"
+          Background="{AppThemeBinding Light={StaticResource Grey1}, Dark={StaticResource Grey9}}">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="0.7*,0.15*,0.15*"
+              ColumnSpacing="5"
+              Padding="5">
+            <Border Grid.Column="0"
+                    HeightRequest="35"
+                    VerticalOptions="Start"
+                    Padding="5,0,5,0"
+                    Background="{AppThemeBinding Light={StaticResource Grey1}, Dark={StaticResource Grey9}}"
+                    StrokeThickness="1"
+                    Stroke="Red">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="5" />
                 </Border.StrokeShape>
-                <HorizontalStackLayout
-                    Spacing="5"
-                    BackgroundColor="Transparent">
+                <HorizontalStackLayout Spacing="5"
+                                       BackgroundColor="Transparent">
                     <HorizontalStackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=GoToSearchPageAsyncCommand}"/>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=GoToSearchPageAsyncCommand}" />
                     </HorizontalStackLayout.GestureRecognizers>
-                    <Image
-                        Source="{AppThemeBinding Dark='search_dark.png',Light='search.png'}"
-                        Aspect="AspectFill"
-                        WidthRequest="15"
-                        HeightRequest="15"
-                        VerticalOptions="Center"/>
-                    <Label
-                        VerticalTextAlignment="Center"
-                        
-                        FontSize="{OnPlatform WinUI=14,MacCatalyst=14,Android=13,iOS=13}"
-                        Text="Episode search"/>
+                    <Image Source="{AppThemeBinding Dark='search_dark.png',Light='search.png'}"
+                           Aspect="AspectFill"
+                           WidthRequest="15"
+                           HeightRequest="15"
+                           VerticalOptions="Center" />
+                    <Label VerticalTextAlignment="Center"
+                           FontSize="{OnPlatform WinUI=14,MacCatalyst=14,Android=13,iOS=13}"
+                           Text="Episode search" />
                 </HorizontalStackLayout>
             </Border>
+            <Image Grid.Column="1"
+                   Source="settings_dark.png"
+                   BackgroundColor="Orange" />
+
+            <Image Grid.Column="2"
+                   Source="tab_home_on.png"
+                   BackgroundColor="Gainsboro" />
         </Grid>
-        <!--TextColor="{AppThemeBinding Dark={StaticResource DarkSearchBarTextColor},Light={StaticResource LightSearchBarTextColor}}"-->
-        <!--<Border
-            Grid.Row="1"
-            Padding="10,0,10,0"
-            Margin="0,-10,0,0"
-            BackgroundColor="Transparent"
-            StrokeThickness="0">
-            <FlexLayout
-                FlexLayout.Grow="0"
-                Direction="Row"
-                Wrap="Wrap"
-                AlignContent="Start"
-                BindableLayout.ItemsSource="{Binding DiscoverTags}">
-                <BindableLayout.ItemTemplate>
+        <Grid Grid.Row="1">
+            <CollectionView VerticalOptions="FillAndExpand"
+                            ItemsSource="{Binding HomeCates}"
+                            ItemsLayout="HorizontalGrid, 1"
+                            RemainingItemsThreshold="{OnPlatform WinUI=5,MacCatalyst=5,Android=1,iOS=1}"
+                            Scrolled="CollectionView_Scrolled_1">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout
-                            Margin="0,0,2,0"
-                            HeightRequest="28"
-                            Style="{StaticResource DataRowEnter}">
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=TagChangedAsyncCommand}"
-                                    CommandParameter="{Binding Id}"/>
-                            </StackLayout.GestureRecognizers>
-
-                            <Border
-                                Padding="4,2,4,2"
-                                StrokeThickness="1"
-                                BackgroundColor="Transparent"
-                                HorizontalOptions="Center">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="5" />
-                                </Border.StrokeShape>
-                                <Border.Triggers>
-                                    <DataTrigger
-                                        TargetType="Border"
-                                        Binding="{Binding IsSelected}"
-                                        Value="true">
-                                        <Setter
-                                            Property="BackgroundColor"
-                                            Value="{StaticResource Main}"/>
-                                    </DataTrigger>
-                                </Border.Triggers>
-                                <Label Text="{Binding Name}"/>
-                            </Border>
-                        </StackLayout>
+                        <Button Text="{Binding Name}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=TabChangedAsyncCommand}"
+                                CommandParameter="{Binding CateId}"
+                                BackgroundColor="Gainsboro"
+                                Margin="5">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button"
+                                             Binding="{Binding IsSelected}"
+                                             Value="true">
+                                    <Setter Property="BackgroundColor"
+                                            Value="Red" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                     </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </FlexLayout>
-        </Border>-->
-        <!--<CollectionView ItemsSource="{Binding HomeEpisodes}"
-                         WidthRequest="{OnPlatform WinUI=800,MacCatalyst=800}"
-                          VerticalOptions="FillAndExpand"
-                        Grid.Row="2"
-                         ItemsLayout="{OnPlatform WinUI='VerticalGrid, 5',MacCatalyst='VerticalGrid, 5',Android='VerticalGrid, 3',iOS='VerticalGrid, 3'}"
-                         RemainingItemsThresholdReachedCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=LoadLastPageTagSongMenusAsyncCommand}"
-                        Scrolled="CollectionView_Scrolled">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                  
-                    <Grid
-                         Padding="10"
-                         RowSpacing="5"
-                         RowDefinitions="Auto,Auto">
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer
-                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=GotoSongMenuPageAsyncCommand}"
-                             CommandParameter="{Binding .}"/>           
-                        </Grid.GestureRecognizers>
-                        <Border
-                             Grid.Row="0"
-                             StrokeThickness="0.1"
-                             StrokeShape="RoundRectangle 10">
-                            <Image
-                                 Aspect="AspectFill"
-                                 Source="{Binding image, TargetNullValue='default_podcast_image.png'}"
-                                 HorizontalOptions="Center"
-                                 Margin="0,0,0,12"
-                                 Grid.Row="0" Grid.Column="0"/>         
-                        </Border>
-                        <Label
-                             Grid.Row="1"
-                             Text="{Binding subtitle}"
-                             LineBreakMode="WordWrap"/>
-                        
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>-->
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+       
+        <Grid Grid.Row="2"
+              BackgroundColor="GhostWhite">
+            <VerticalStackLayout Spacing="5" >
+                <!--<ActivityIndicator IsRunning="true" />-->
+                <VerticalStackLayout Spacing="3"
+                                     VerticalOptions="End"
+                                     HorizontalOptions="Start">
+                    <Label Text="{x:Static res:AppResource.Categories}"
+                           Style="{StaticResource Tab}" />
+                    <BoxView HeightRequest="3"
+                             WidthRequest="100"
+                             Margin="0,0,8,0"
+                             Color="{StaticResource Primary}">
+                    </BoxView>
+                </VerticalStackLayout>
 
-        <CollectionView
-            Grid.Row="2"
-            WidthRequest="{OnPlatform WinUI=800,MacCatalyst=800}"
-            VerticalOptions="FillAndExpand"
-            ItemsSource="{Binding HomeEpisodes}"
-            ItemsLayout="{OnPlatform WinUI='VerticalGrid, 5',MacCatalyst='VerticalGrid, 5',Android='VerticalGrid, 3',iOS='VerticalGrid, 3'}"
-            BackgroundColor="Yellow"
-            RemainingItemsThreshold="{OnPlatform WinUI=5,MacCatalyst=5,Android=3,iOS=3}"
-            RemainingItemsThresholdReachedCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=LoadLastPageTagSongMenusAsyncCommand}"
-            Scrolled="CollectionView_Scrolled">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid
-      Padding="10"
-      RowSpacing="5"
-      RowDefinitions="Auto,Auto">
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer
-          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=GotoSongMenuPageAsyncCommand}"
-          CommandParameter="{Binding .}"/>
-                        </Grid.GestureRecognizers>
-                        <Border
-          Grid.Row="0"
-          StrokeThickness="0.1"
-          StrokeShape="RoundRectangle 10">
-                            <Image
-              Aspect="AspectFill"
-              Source="{Binding image, TargetNullValue='default_podcast_image.png'}"
-              HorizontalOptions="Center"
-              Margin="0,0,0,12"
-              Grid.Row="0" Grid.Column="0"/>
-                        </Border>
-                        <Label
-          Grid.Row="1"
-          Text="{Binding subtitle}"
-          LineBreakMode="WordWrap"/>
+                <CollectionView ItemsSource="{Binding HomeCateChild}"
+                                ItemsUpdatingScrollMode="KeepLastItemInView"
+                                VerticalOptions="Fill"
+                                ItemsLayout="VerticalGrid,3">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                            <Border Stroke="Red"
+                                    StrokeShape="RoundRectangle 5,5,5,5"
+                                    Margin="5"
+                                    Padding="5"
+                                    MinimumHeightRequest="100">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=GoToDetailCateAsyncCommand}"
+                                                          CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
 
-        <!--<controls:Player
-            Grid.Row="3"
-            x:Name="player"
-            IsPlayingPage="False"/>-->
+                                <StackLayout>
+                                    <!--<ff:CachedImage  Source="{Binding image}"
+                                                     ErrorPlaceholder="default_podcast_image.png"
+                                                     LoadingPlaceholder="loading_image.png" />-->
+                                    <Image Source="tab_home_on.png" />
+
+                                    <Label Text="{Binding Name}"
+                                           Padding="5,5,0,0"
+                                           FontSize="14" />
+                                </StackLayout>
+
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <BoxView HeightRequest="3"
+                         WidthRequest="100"
+                         Margin="0,0,8,0"
+                         Color="{StaticResource Primary}">
+                </BoxView>
+            </VerticalStackLayout>
+        </Grid>
+        <controls:Player Grid.Row="3"
+                         x:Name="player"
+                        />
+
     </Grid>
 </ContentPage>

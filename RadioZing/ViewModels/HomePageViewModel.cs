@@ -23,13 +23,13 @@ public partial class HomePageViewModel : ViewModelBase
     private ObservableCollection<Episode> _homeEpisodes;
 
     private static readonly object LockPlatformMusicTags = new object();
-    private readonly ShowsService showsService;
+    private readonly GetDataService showsService;
     private readonly SubscriptionsService subscriptionsService;
     private readonly ImageProcessingService imageProcessingService;
 
     //private readonly SearchPage _searchPage;
     private readonly ILogger<HomePageViewModel> _logger;
-    public HomePageViewModel(ShowsService shows, SubscriptionsService subs, CategoriesViewModel categories, ImageProcessingService imageProcessing, ILogger<HomePageViewModel> logger)
+    public HomePageViewModel(GetDataService shows, SubscriptionsService subs, CategoriesViewModel categories, ImageProcessingService imageProcessing, ILogger<HomePageViewModel> logger)
     {
         showsService = shows;
         subscriptionsService = subs;
@@ -44,7 +44,6 @@ public partial class HomePageViewModel : ViewModelBase
     {
         //Delay on first load until window loads
         await FetchRootCateAsync();
-       // await FetchListEpisodeByCate("radio-online");
     }
     private async Task FetchRootCateAsync()
     {
@@ -58,15 +57,25 @@ public partial class HomePageViewModel : ViewModelBase
                 AppResource.Close);
             return;
         }
-        HomeCates.Clear();
-        HomeCates = new ObservableCollection<Category>(rootCate); //khong dung foreach
+       
         if (_currentRootCateId == "")
         {
-            //radio-online
-            _currentRootCateId = rootCate.LastOrDefault().cateId;
+            HomeCates.Clear();
+            int _index = 0;
+            foreach (var category in rootCate) {
+                if (_index == 0)
+                {
+                    _currentRootCateId = category.CateId;
+                   category.IsSelected = true;
+                }
+                else
+                {
+                    category.IsSelected = false;
+                }
+                HomeCates.Add(category);
+            }
             //lay phan tu dau tien
-            await FetchCateByParentIdAsync(_currentRootCateId);
-            //await FetchListEpisodeByCate(_currentRootCateId);
+            await SelectTab(_currentRootCateId);
         }
 
     }
@@ -74,9 +83,18 @@ public partial class HomePageViewModel : ViewModelBase
     {
         var cates = await showsService.GetCateByParent(cateParentId);
         HomeCateChild.Clear();
-        HomeCateChild = new ObservableCollection<Category>(cates);
+        if (cates != null && cates.Count() > 0)
+        {
+            //add to list
+            foreach (var child in cates)
+            {
+                child.Image =Config.APIUrl+ child.Image;
+                //episode.image = await imageProcessingService.ProcessRemoteImage(new Uri(episode.ImageUrl));
+                HomeCateChild.Add(child);
+            }
+        }
         //load Episode
-        await FetchListEpisodeByCate(cateParentId);
+       // await FetchListEpisodeByCate(cateParentId);
     }
 
     private async Task FetchListEpisodeByCate(string cateId)
@@ -119,13 +137,13 @@ public partial class HomePageViewModel : ViewModelBase
     {
         foreach (var tab in HomeCates)
         {
-            if (tab.cateId == id)
+            if (tab.CateId == id)
             {
-                tab.isSelected = true;
+                tab.IsSelected = true;
             }
             else
             {
-                tab.isSelected = false;
+                tab.IsSelected = false;
             }
         }
         await FetchCateByParentIdAsync(id);
@@ -162,14 +180,14 @@ public partial class HomePageViewModel : ViewModelBase
        
     }
 
-  
 
-    //[RelayCommand]
-    //private async void GotoSongMenuPageAsync(SongMenuViewModel songMenu)
-    //{
-    //    string json = HttpUtility.UrlEncode(songMenu.ToJson());
-    //    await Shell.Current.GoToAsync($"{nameof(SongMenuPage)}?Json={json}&PlatformString={Platform}");
-    //}
+
+    [RelayCommand]
+    private async void GoToDetailCateAsync(Category cate)
+    {
+        //if(cate.)
+        await Shell.Current.GoToAsync($"{nameof(DetailCatePage)}?IdCate={cate.CateId}&TypeCate={cate.Type}");
+    }
 
     //[RelayCommand]
     //private async void GoToSearchPageAsync()

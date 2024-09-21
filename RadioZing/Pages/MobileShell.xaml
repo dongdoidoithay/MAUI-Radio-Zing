@@ -5,7 +5,8 @@
        xmlns:root="clr-namespace:RadioZing"
        xmlns:viewmodels="clr-namespace:RadioZing.ViewModels"
        x:DataType="viewmodels:ShellViewModel"
-       x:Class="RadioZing.Pages.MobileShell">
+       x:Class="RadioZing.Pages.MobileShell"
+       >
     <TabBar>
         <Tab Title="{Binding Discover.Title}"
              Icon="{Binding Discover.Icon}">

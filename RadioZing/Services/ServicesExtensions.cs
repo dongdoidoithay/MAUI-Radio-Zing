@@ -8,7 +8,7 @@ public static class ServicesExtensions
     {
         builder.Services.AddMauiBlazorWebView();
         builder.Services.AddSingleton<SubscriptionsService>();
-        builder.Services.AddSingleton<ShowsService>();
+        builder.Services.AddSingleton<GetDataService>();
         builder.Services.AddSingleton<ListenLaterService>();
 #if WINDOWS
         builder.Services.TryAddSingleton<SharedMauiLib.INativeAudioService, SharedMauiLib.Platforms.Windows.NativeAudioService>();

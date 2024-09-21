@@ -1,4 +1,5 @@
-﻿using MonkeyCache.FileStore;
+﻿using FFImageLoading.Maui;
+using MonkeyCache.FileStore;
 
 namespace RadioZing;
 
@@ -9,10 +10,12 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            
             .ConfigureEssentials()
             .ConfigureServices()
             .ConfigurePages()
             .ConfigureViewModels()
+            .UseFFImageLoading()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("Segoe-Ui-Bold.ttf", "SegoeUiBold");

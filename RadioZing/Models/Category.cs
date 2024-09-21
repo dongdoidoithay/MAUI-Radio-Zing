@@ -2,26 +2,33 @@
 
 namespace RadioZing.Models;
 
-public class Category
+public partial class Category:ObservableObject
 {
     public Category(CategoryResponse response)
     {
-        cateId= response.cateId;
-        cateParentId = response.cateParentId;
-        name = response.name;
-        description = response.description;
-        type = response.description;
-        image = response.image;
-        isActive = response.isActive;
+        CateId = response.cateId;
+        CateParentId = response.cateParentId;
+        Name = response.name;
+        Description = response.description;
+        Type = response.description;
+        Image = response.image;
+        IsActive = response.isActive;
     }
 
-    public string cateId { get; set; }
-    public string? cateParentId { get; set; }
-    public string? name { get; set; }
-    public string? description { get; set; }
-    public string? type { get; set; }
-    public string? image { get; set; }
-    public bool isActive { get; set; }
-    
-    public bool isSelected {  get; set; }=false;
+    [ObservableProperty]
+    private string cateId;
+    [ObservableProperty]
+    private string? cateParentId;
+    [ObservableProperty]
+    private string? name;
+    [ObservableProperty]
+    private string? description;
+    [ObservableProperty]
+    private string? type;
+    [ObservableProperty]
+    private string? image;
+    [ObservableProperty]
+    private bool isActive;
+    [ObservableProperty]
+    private bool isSelected ;
 }

@@ -28,7 +28,7 @@ public partial class Player : ContentView
 
     private async void PlayGesture_Tapped(object sender, EventArgs e)
     {
-        await playerService.PlayAsync(playerService.CurrentEpisode, playerService.CurrentShow);
+        await playerService.PlayAsync(playerService.CurrentEpisode);
     }
 
     internal void OnAppearing()
@@ -53,9 +53,9 @@ public partial class Player : ContentView
         {
             PlayButtonSource = this.playerService.IsPlaying ? "player_pause.png" : "player_play.png",
             EpisodeTitle = this.playerService.CurrentEpisode.subtitle,
-            AuthorText = $"{this.playerService.CurrentShow?.Author} - {this.playerService.CurrentEpisode?.date:MMM, d yyy}",
-            PodcastImage = this.playerService.CurrentShow?.Image,
-            Duration = this.playerService.CurrentEpisode?.Duration.ToString()
+            AuthorText = $"{this.playerService.CurrentEpisode?.auth} - {this.playerService.CurrentEpisode?.date:MMM, d yyy}",
+            PodcastImage = this.playerService.CurrentEpisode?.ImageUrl,
+            Duration = this.playerService.CurrentEpisode?.Duration?.ToString()
         };
     }
 

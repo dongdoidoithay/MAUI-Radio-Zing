@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:RadioZing.ViewModels"
+             x:Class="RadioZing.Views.ChildHomeView"
+             xmlns:ff="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:res="clr-namespace:RadioZing.Resources.Strings"
+             >
+    <VerticalStackLayout Spacing="5" >
+        <!--<ActivityIndicator IsRunning="true" />-->
+        <VerticalStackLayout
+                Spacing="3"
+                VerticalOptions="End"
+                HorizontalOptions="Start">
+            <Label
+                Text="{x:Static res:AppResource.Categories}"
+                Style="{StaticResource Tab}"/>
+            <BoxView
+                HeightRequest="3"
+                WidthRequest="100"
+                Margin="0,0,8,0"
+                Color="{StaticResource Primary}">
+            </BoxView>
+        </VerticalStackLayout>
+        
+        <CollectionView
+            ItemsSource="{Binding HomeCateChild}"
+            ItemsUpdatingScrollMode="KeepLastItemInView"
+            HeightRequest="60"
+            HorizontalOptions="Fill"
+            ItemsLayout="HorizontalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    
+                    <Grid RowDefinitions="Auto" ColumnDefinitions="Auto" RowSpacing="5">
+                        <!-- Image Background -->
+                        <ff:CachedImage  Source="{Binding image}"
+                           ErrorPlaceholder="default_podcast_image.png"
+                           LoadingPlaceholder="loading_image.png"
+                           />
+                        <!-- Overlay Content -->
+                        <Grid
+                            ColumnDefinitions="Auto,*"
+                            HorizontalOptions="Start"
+                            Padding="5,0,0,5">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=TabChangedAsyncCommand}"
+                                  CommandParameter="{Binding cateId}"/>
+                            </Grid.GestureRecognizers>
+                            <Border
+                                  Grid.Column="0"
+                                  StrokeThickness="0.1"
+                                  StrokeShape="RoundRectangle 5"
+                                  WidthRequest="40"
+                                  VerticalOptions="CenterAndExpand">
+                                <ff:CachedImage  Source="{Binding image}"
+                                    ErrorPlaceholder="default_podcast_image.png"
+                                    LoadingPlaceholder="loading_image.png"/>
+                            </Border>
+                            <StackLayout Grid.Column="1" VerticalOptions="End">
+                                <Label
+                                  VerticalTextAlignment="End"
+                                  Text="{Binding name}"
+                                  Padding="5,0,0,0"/>
+                                <BoxView Color="{StaticResource Primary}"
+                                       WidthRequest="160"
+                                       HeightRequest="2"
+                                       VerticalOptions="Start"
+                                />   
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <BoxView
+            HeightRequest="3"
+            WidthRequest="100"
+            Margin="0,0,8,0"
+            Color="{StaticResource Primary}">
+        </BoxView>
+    </VerticalStackLayout>
+</ContentView>

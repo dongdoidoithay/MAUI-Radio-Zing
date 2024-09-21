@@ -19,7 +19,7 @@ public class SubscriptionsService
         if (show == null)
             return ;
 
-        SemanticScreenReader.Announce(string.Format("Subscribe to show {0}", show.Title));
+        SemanticScreenReader.Announce(string.Format("Subscribe to cate {0}", show.Title));
         this.subscribedShows.Add(show);
     }
 

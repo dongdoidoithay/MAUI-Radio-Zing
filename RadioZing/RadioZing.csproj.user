@@ -31,6 +31,9 @@
     <MauiXaml Update="Pages\DesktopShell.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\DetailCatePage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\DiscoverPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
@@ -56,6 +59,9 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Pages\SubscriptionsPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ChildHomeView.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\EpisodeItemView.xaml">

@@ -5,7 +5,7 @@ namespace RadioZing.ViewModels;
 
 public partial class DiscoverViewModel : ViewModelBase
 {
-    private readonly ShowsService showsService;
+    private readonly GetDataService showsService;
     private readonly SubscriptionsService subscriptionsService;
     private readonly ImageProcessingService imageProcessingService;
 
@@ -20,7 +20,7 @@ public partial class DiscoverViewModel : ViewModelBase
     [ObservableProperty]
     ObservableRangeCollection<ShowGroup> podcastsGroup;
 
-    public DiscoverViewModel(ShowsService shows, SubscriptionsService subs, CategoriesViewModel categories, ImageProcessingService imageProcessing)
+    public DiscoverViewModel(GetDataService shows, SubscriptionsService subs, CategoriesViewModel categories, ImageProcessingService imageProcessing)
     {
         showsService = shows;
         subscriptionsService = subs;

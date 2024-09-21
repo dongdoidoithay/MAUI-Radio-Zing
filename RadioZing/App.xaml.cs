@@ -19,6 +19,9 @@
             Routing.RegisterRoute(nameof(EpisodeDetailPage), typeof(EpisodeDetailPage));
             Routing.RegisterRoute(nameof(CategoriesPage), typeof(CategoriesPage));
             Routing.RegisterRoute(nameof(CategoryPage), typeof(CategoryPage));
+
+            Routing.RegisterRoute(nameof(DetailCatePage),typeof(DetailCatePage));
+
         }
 
         Window window;

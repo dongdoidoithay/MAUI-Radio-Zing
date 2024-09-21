@@ -61,10 +61,11 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
         <PackageReference Include="MonkeyCache.FileStore" Version="2.1.1" />-->
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="FFImageLoading.Maui" Version="1.2.6" />
 		<PackageReference Include="MonkeyCache.FileStore" Version="2.1.1" />
 		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
-		<PackageReference Include="SkiaSharp" Version="2.88.6" />
-		<PackageReference Include="System.Threading.RateLimiting" Version="7.0.0" />
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+		<PackageReference Include="System.Threading.RateLimiting" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -103,6 +104,9 @@
       <MauiXaml Update="Pages\DesktopShell.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Pages\DetailCatePage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Pages\DiscoverPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
@@ -130,12 +134,27 @@
       <MauiXaml Update="Pages\SubscriptionsPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Views\ChildHomeView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Views\EpisodeItemView.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
       <MauiXaml Update="Views\ShowItemView.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.80" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.80" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.80" />
     </ItemGroup>
 
 </Project>

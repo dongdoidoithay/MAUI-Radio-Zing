@@ -1,41 +1,29 @@
-﻿using RadioZing.ViewModels;
-
 namespace RadioZing.Pages;
 
-public partial class HomePage : ContentPage
+public partial class DetailCatePage : ContentPage
 {
-
-
-    private bool _isFirstAppearing = true;
-    //Control each time when scrolling, only one page of data is loaded
     private DateTime _lastScrollToTime = DateTime.Now;
-    HomePageViewModel viewModel => BindingContext as HomePageViewModel;
-
-    public HomePage(HomePageViewModel vm)
-    {
-        // Ẩn title trong Shell
-        Shell.SetNavBarIsVisible(this, false);
-
-        InitializeComponent();
+    private DetailCateViewModel viewModel => BindingContext as DetailCateViewModel;
+    public DetailCatePage(DetailCateViewModel vm)
+	{
+		InitializeComponent();
         BindingContext = vm;
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        //player.OnAppearing();
+        this.player.OnAppearing();
         await viewModel.InitializeAsync();
     }
 
-
     protected override void OnDisappearing()
     {
-        //player.OnDisappearing();
+        this.player.OnDisappearing();
         base.OnDisappearing();
     }
 
     private void CollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
     {
-        //TODO In Win UI, the Remaining Items Threshold Reached Command cannot be triggered at present, so implement it yourself first
         if (DeviceInfo.Current.Platform != DevicePlatform.WinUI)
         {
             return;
@@ -44,7 +32,7 @@ public partial class HomePage : ContentPage
         {
             return;
         }
-        _lastScrollToTime = DateTime.Now.AddMilliseconds(20);
+        _lastScrollToTime = DateTime.Now.AddSeconds(1);
 
         if (sender is CollectionView cv && cv is IElementController element)
         {
@@ -57,10 +45,5 @@ public partial class HomePage : ContentPage
                 }
             }
         }
-    }
-
-    private void CollectionView_Scrolled_1(object sender, ItemsViewScrolledEventArgs e)
-    {
-
     }
 }

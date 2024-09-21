@@ -3,7 +3,7 @@
 [QueryProperty(nameof(Id), nameof(Id))]
 public partial class CategoryViewModel : ViewModelBase
 {
-    private readonly ShowsService showsService;
+    private readonly GetDataService showsService;
     private readonly SubscriptionsService subscriptionsService;
     private readonly ImageProcessingService imageProcessingService;
 
@@ -19,7 +19,7 @@ public partial class CategoryViewModel : ViewModelBase
     List<ShowViewModel> shows;
 
 
-    public CategoryViewModel(ShowsService shows, SubscriptionsService subs, ImageProcessingService imageProcessing)
+    public CategoryViewModel(GetDataService shows, SubscriptionsService subs, ImageProcessingService imageProcessing)
     {
         showsService = shows;
         subscriptionsService = subs;

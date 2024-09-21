@@ -5,13 +5,13 @@ using MonkeyCache.FileStore;
 
 namespace RadioZing.Services;
 
-public class ShowsService
+public class GetDataService
 {
     private readonly HttpClient httpClient;
     private readonly ListenLaterService listenLaterService;
     private bool firstLoad = true;
 
-    public ShowsService(ListenLaterService listenLaterService)
+    public GetDataService(ListenLaterService listenLaterService)
     {
         this.httpClient = new HttpClient() { BaseAddress = new Uri(Config.APIUrl) };
         httpClient.DefaultRequestHeaders.Add("api-version", "1.0");
@@ -70,7 +70,7 @@ public class ShowsService
         {
             foreach(var show in showsResponse)
             {
-                //result.Add(GetShow(show));
+                //result.Add(GetShow(cate));
             }
 
             return result;
@@ -104,7 +104,7 @@ public class ShowsService
             firstLoad = false;
 
             // On first load, it takes a significant amount of time to initialize
-            // the ShowsService. For example, Connectivity.NetworkAccess, Barrel.Current.Get,
+            // the GetDataService. For example, Connectivity.NetworkAccess, Barrel.Current.Get,
             // and HttpClient all take time to initialize.
             //
             // Don't block the UI thread while doing this initialization, so the app starts faster.

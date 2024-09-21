@@ -9,7 +9,7 @@ public partial class ShowDetailViewModel : ViewModelBase
     private readonly PlayerService playerService;
     private readonly SubscriptionsService subscriptionsService;
     private readonly ListenLaterService listenLaterService;
-    private readonly ShowsService showsService;
+    private readonly GetDataService showsService;
     private readonly ImageProcessingService imageProcessingService;
 
     public string Id { get; set; }
@@ -29,7 +29,7 @@ public partial class ShowDetailViewModel : ViewModelBase
     [ObservableProperty]
     string textToSearch;
 
-    public ShowDetailViewModel(ShowsService shows, PlayerService player, SubscriptionsService subs, ListenLaterService later, ImageProcessingService imageProcessing)
+    public ShowDetailViewModel(GetDataService shows, PlayerService player, SubscriptionsService subs, ListenLaterService later, ImageProcessingService imageProcessing)
     {
         showsService = shows;
         playerService = player;
@@ -97,7 +97,7 @@ public partial class ShowDetailViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    Task PlayEpisode(Episode episode) => playerService.PlayAsync(episode, Show.Show);
+    Task PlayEpisode(Episode episode) => playerService.PlayAsync(episode);
 
     [RelayCommand]
     Task AddToListenLater(Episode episode)

@@ -8,13 +8,12 @@ public class PlayerService
     private readonly WifiOptionsService wifiOptionsService;
 
     public Episode CurrentEpisode { get; set; }
-    public Show CurrentShow { get; set; }
 
     public bool IsPlaying { get; set; }
     public double CurrentPosition => audioService.CurrentPosition;
 
-    public event EventHandler NewEpisodeAdded;
-    public event EventHandler IsPlayingChanged;
+    public event EventHandler NewEpisodeAdded ;
+    public event EventHandler IsPlayingChanged ;
 
     public PlayerService(INativeAudioService audioService, WifiOptionsService wifiOptionsService)
     {
@@ -28,13 +27,13 @@ public class PlayerService
         };
     }
 
-    public async Task PlayAsync(Episode episode, Show show, bool isPlaying, double position = 0)
+    public async Task PlayAsync(Episode episode, bool isPlaying, double position = 0)
     {
         if (episode == null) { return; }
 
         var isOtherEpisode = CurrentEpisode?.episodeId != episode.episodeId;
 
-        CurrentShow = show;
+       // CurrentShow = cate;
 
         if (isOtherEpisode)
         {
@@ -45,22 +44,20 @@ public class PlayerService
                 await InternalPauseAsync();
             }
 
-            await audioService.InitializeAsync(CurrentEpisode.Url.ToString());
+            await audioService.InitializeAsync(CurrentEpisode.songUrl.ToString());
 
             await InternalPlayPauseAsync(isPlaying, position);
-
-            NewEpisodeAdded?.Invoke(this, EventArgs.Empty);
+            //NewEpisodeAdded?.Invoke(this, EventArgs.Empty);
         }
         else
         {
             await InternalPlayPauseAsync(isPlaying, position);
         }
-
-        IsPlayingChanged?.Invoke(this, EventArgs.Empty);
+       IsPlayingChanged?.Invoke(this, EventArgs.Empty);
     }
 
 
-    public Task PlayAsync(Episode episode, Show show)
+    public Task PlayAsync(Episode episode)
     {
         var isOtherEpisode = CurrentEpisode?.episodeId != episode.episodeId;
         var isPlaying = isOtherEpisode || !audioService.IsPlaying;
@@ -78,7 +75,7 @@ public class PlayerService
             }
         }
 
-        return PlayAsync(episode, show, isPlaying, position);
+        return PlayAsync(episode, isPlaying, position);
     }
 
     public async Task resumeEpisode(double position)

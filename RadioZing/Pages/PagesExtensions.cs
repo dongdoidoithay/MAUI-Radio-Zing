@@ -12,6 +12,7 @@ public static class PagesExtensions
         builder.Services.AddSingleton<ListenTogetherPage>();
         builder.Services.AddSingleton<SettingsPage>();
 
+        builder.Services.AddSingleton<DetailCatePage>();
         // pages that are navigated to
         builder.Services.AddTransient<CategoriesPage>();
         builder.Services.AddTransient<CategoryPage>();

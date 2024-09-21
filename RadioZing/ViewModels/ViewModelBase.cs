@@ -1,7 +1,11 @@
-﻿namespace RadioZing.ViewModels;
+﻿using RadioZing.Utils;
+
+namespace RadioZing.ViewModels;
 
 public partial class ViewModelBase : ObservableObject
 {
+    private string _loadingKey = "";
+
     [ObservableProperty]
     string title;
 
@@ -25,4 +29,27 @@ public partial class ViewModelBase : ObservableObject
 
     [ObservableProperty]
     string footer;
+
+    //loadding
+    internal void Loading(string message)
+    {
+        //The same page is not allowed to load at the same time
+        if (_loadingKey.IsNotEmpty())
+        {
+            return;
+        }
+        _loadingKey = GuidUtils.GetFormatN();
+        //LoadingService.Loading(_loadingKey, message);
+    }
+    internal void LoadComplete()
+    {
+        if (_loadingKey.IsEmpty())
+        {
+            return;
+        }
+        //LoadingService.LoadComplete(_loadingKey);
+        _loadingKey = "";
+    }
+
+
 }

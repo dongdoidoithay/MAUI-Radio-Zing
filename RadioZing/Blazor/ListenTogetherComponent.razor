@@ -86,7 +86,7 @@
         var episode = new Episode(playerState);
         var show = new Show(playerState);
 
-        await PlayerService.PlayAsync(episode, show, playerState.IsPlaying, playerState.Progress.TotalSeconds);
+        await PlayerService.PlayAsync(episode,playerState.IsPlaying, playerState.Progress.TotalSeconds);
 
         PlayerService.IsPlayingChanged += IsLocalPlayingChanged;
     }

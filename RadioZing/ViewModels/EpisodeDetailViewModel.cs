@@ -7,7 +7,7 @@ namespace RadioZing.ViewModels;
 public partial class EpisodeDetailViewModel : ViewModelBase
 {
     private readonly ListenLaterService listenLaterService;
-    private readonly ShowsService podcastService;
+    private readonly GetDataService podcastService;
     private readonly PlayerService playerService;
     private readonly SubscriptionsService subscriptionsService;
     private readonly ImageProcessingService imageProcessingService;
@@ -35,7 +35,7 @@ public partial class EpisodeDetailViewModel : ViewModelBase
     [ObservableProperty]
     private ShowViewModel show;
 
-    public EpisodeDetailViewModel(ListenLaterService listen, ShowsService shows, PlayerService player, SubscriptionsService subs, ImageProcessingService imageProcessing)
+    public EpisodeDetailViewModel(ListenLaterService listen, GetDataService shows, PlayerService player, SubscriptionsService subs, ImageProcessingService imageProcessing)
     {
         listenLaterService = listen;
         podcastService = shows;
@@ -91,13 +91,13 @@ public partial class EpisodeDetailViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    Task Play() => playerService.PlayAsync(Episode, Show.Show);
+    Task Play() => playerService.PlayAsync(Episode);
 
     [RelayCommand]
     Task Share() => 
         Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new ShareTextRequest
     {
-        Text = $"{Config.BaseWeb}show/{show.Show.Id}",
+        Text = $"{Config.BaseWeb}cate/{show.Show.Id}",
         Title = "Share the episode uri"
     });
 }

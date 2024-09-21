@@ -2,12 +2,12 @@
 
 public partial class CategoriesViewModel : ViewModelBase
 {
-    private readonly ShowsService showsService;
+    private readonly GetDataService showsService;
 
     [ObservableProperty]
     List<Category> categories;
 
-    public CategoriesViewModel(ShowsService shows)
+    public CategoriesViewModel(GetDataService shows)
     {
         showsService = shows;
     }
@@ -22,6 +22,6 @@ public partial class CategoriesViewModel : ViewModelBase
     [RelayCommand]
     Task Selected(Category category)
     {
-        return Shell.Current.GoToAsync($"{nameof(CategoryPage)}?Id={category.cateId}");
+        return Shell.Current.GoToAsync($"{nameof(CategoryPage)}?Id={category.CateId}");
     }
 }

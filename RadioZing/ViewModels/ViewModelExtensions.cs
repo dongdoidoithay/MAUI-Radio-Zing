@@ -19,6 +19,9 @@ public static class ViewModelExtensions
         builder.Services.AddSingleton<ShowViewModel>();
         builder.Services.AddSingleton<SubscriptionsViewModel>();
 
+
+        builder.Services.AddSingleton<DetailCateViewModel>();
+
         return builder;
     }
 }
